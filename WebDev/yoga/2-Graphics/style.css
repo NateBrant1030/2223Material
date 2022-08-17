@@ -1,0 +1,33 @@
+/* embeded */
+body{
+    background-color: gray;
+    color: #40407A;
+    font-family:Arial, Helvetica, sans-serif
+}
+h1{background-color:aquamarine;
+    display:flex;
+    justify-content:center;
+    line-height:200%;
+
+}
+h2{
+    font-size:200%;
+    
+}
+nav{text-align:center;
+font-weight:bold;}
+
+nav a{text-decoration:none}
+
+footer{background-color:#80CBC4;
+font-size:.60em;
+text-align:center;
+font-family: Arial, Helvetica, sans-serif;
+font-style: italic;
+display:flex;
+justify-content:center;}
+/* classes */
+#wrapper{margin-left:auto;
+margin-right:auto;
+width:80%}
+/* id styleing */
