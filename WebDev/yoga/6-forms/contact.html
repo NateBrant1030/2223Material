@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contact page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="home"><a href="index.html">Path of light Yoga Studio</a></h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="classes.html">Classes</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div id="wrapper">
+        <main>
+            <h2>Contact the Path of Light Yoga Studo</h2>
+            <p>Fill out the form below to contact Path of Light Yoga Studo. All information is required</p>
+            <form method="post" action="https://webdevbasics.net/scripts/yoga.php">
+                <lable for="myname">Name:</lable>
+                <input placeholder="Your Name" id="myname" type="text" required>
+                <lable for="email">E-mail:</lable>
+                <input placeholder="Your E-mail" id="email" type="email" required>
+                <lable for="how">How did you hear about us?</lable>
+                <input placeholder="How did you get here " id="how" type="text" required list="refer">
+                <datalist id="refer">
+                    <option value="Google"></option>
+                    <option value="Facebook"></option>
+                    <option value="Friend"></option>
+                    <option value="Radio"></option>
+                </datalist>
+                <lable for="comment" row=2 cols=20>Comments:</lable>
+                <textarea placeholder="Your Comment" id="comment" type="text" required></textarea>
+                <button id="submit">Send Now</button>
+            </form>
+        </main>
+        <footer>Copyright © 2020 <i>Path of Light Yoga Studio</i><br></footer>
+        <footer>
+            <a href="mailto:nathaniel.brant@evsck12.com">Email Us</a>
+        </footer>
+    </div>
+    <script src="" async defer></script>
+</body>
+
+</html>

@@ -1,4 +1,22 @@
+table{width:60%;
+    border:1px solid #3f2860;
+    border-collapse:collapse;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    td,th{ border: 1px solid #3f2860;
+    padding:5px;}
+    
+    h3{margin:1em;
+    font-weight:bold;
+font-size:120%;
+text-align:center;}
 
+tr:nth-last-of-type(even){background:#DBe8e9}
+
+/* div{border: 1px black solid;} */
 @media(min-width:1024px){
 
 
