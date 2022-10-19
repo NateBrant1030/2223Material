@@ -1,12 +1,12 @@
 package com.example.scfi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.util.Random;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     EditText firstNameTXT ,lastNameTXT,cityTXT,schoolTXT,broTXT,sisTXT;
@@ -36,6 +36,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void generate(){
+        String first=String.valueOf(firstNameTXT.getText());
+        String last=String.valueOf(lastNameTXT.getText());
+        String city=String.valueOf(cityTXT.getText());
+        String school=String.valueOf(schoolTXT.getText());
+        String bro=String.valueOf(broTXT.getText());
+        String sis=String.valueOf(sisTXT.getText());
+    try{
+        Random random= new Random();
+        int rf = random.nextInt(first.length());
+        int rl = random.nextInt(last.length());
+        int rc = random.nextInt(city.length());
+        int s = random.nextInt(school.length());
+        int rb = random.nextInt(bro.length());
+        int rs = random.nextInt(sis.length());
+
+        String scifiFirst = first.substring(0,rf) + last.substring(last.length()-rl);
+        String scifiLast = city.substring(0,rc)+school.substring(school.length()-s);
+        String scifiHome = bro.substring(0,rb)+sis.substring(sis.length()-rs);
+        output.setText(String.format("Welcome!, %s  %s from %s",scifiFirst,scifiLast,scifiHome));}
+        catch (Exception e){output.setText(String.format("to short of words"));}
+
 
     }
 }
