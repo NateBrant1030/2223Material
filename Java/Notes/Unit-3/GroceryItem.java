@@ -1,32 +1,33 @@
 public class GroceryItem {
-    private String name;
-    private double cost;
-    public GroceryItem(String name, double cost){
-        this.name = name;
-        this.cost=cost;
 
-    }
-    public String getName() {
-        return this.name;
-    }
+     public String name;
+     public double cost;
 
-    public double getCost() {
-        return this.cost;
-    }
+     //need the no arg constructor technically
 
-    public void setName(String Name) {
-        this.name = Name;
-    }
+     public GroceryItem(String name,double cost){
+          this.name=name;
+          this.cost=cost;
+     }
 
-    public void setCost(double Name) {
-        this.cost = Name;
-    }
+     //getters and setters
+     public void setName(String newName){
+          this.name=newName;
+     }
+     public String getName(){
+          return this.name;
+     }
+     public void setCost(double newCost){
+          this.cost=newCost;
+     }
+     public double getCost(){
+          return this.cost;
+     }
 
+     //toString
+     @Override
+     public String toString(){
+          return this.name +" - "+String.valueOf(this.cost);
+     }
 
-    @Override
-    public String toString() {
-        return this.name + " cost: " + String.valueOf(this.cost);
-
-    
-}
 }
