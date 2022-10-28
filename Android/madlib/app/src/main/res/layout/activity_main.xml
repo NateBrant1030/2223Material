@@ -22,7 +22,8 @@
             android:id="@+id/mad1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="madlib1" />
+            android:text="madlib1"
+            android:onClick="test"/>
 
         <Button
             android:id="@+id/mad2"
