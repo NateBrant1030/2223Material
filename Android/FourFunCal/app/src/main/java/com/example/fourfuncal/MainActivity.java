@@ -1,18 +1,19 @@
 package com.example.fourfuncal;
 
-import static java.lang.Integer.parseInt;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
-    String math = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,129 +25,80 @@ public class MainActivity extends AppCompatActivity {
         Button div =findViewById(R.id.div);
         TextView output =findViewById(R.id.output);
         Button enter =findViewById(R.id.enter);
-        EditText num1 = findViewById(R.id.num1TXT);
-        EditText num2 = findViewById(R.id.num2TXT);
+        Button clear = findViewById((R.id.clear));
+        Button b0 =findViewById(R.id.btns0);
+        Button b1 =findViewById(R.id.btn1);
+        Button b2 =findViewById(R.id.btn2);
+        Button b3 =findViewById(R.id.btn3);
+        Button b4 =findViewById(R.id.btn4);
+        Button b5 =findViewById(R.id.btn5);
+        Button b6 =findViewById(R.id.btn6);
+        Button b7 =findViewById(R.id.btn7);
+        Button b8 =findViewById(R.id.btn8);
+        Button b9 =findViewById(R.id.btn9);
+
+        ArrayList<Button> bList = new ArrayList<>(Arrays.asList(b0,b1,b2,b3,b4,b5,b6,b7,b8,b9));
+
+
+        for (int i = 0; i < 10; i++) {
+            int a = i;
+            bList.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    output.setText(String.format(String.valueOf(output.getText())+String.valueOf(bList.get(a).getText())));
+                    System.out.println(String.valueOf(output.getText())+String.valueOf(bList.get(a).getText()));
+                }
+            });
+        }
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                math="+";
+
+                output.setText(String.format(String.valueOf(output.getText())+"+"));
 
             }
         });
         sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                math="-";
+                output.setText(String.format(String.valueOf(output.getText())+"-"));
 
             }
         });
         mult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                math="*";
+                output.setText(String.format(String.valueOf(output.getText())+"*"));
             }
         });
         div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                math="/";
+                output.setText(String.format(String.valueOf(output.getText())+"/"));
 
             }
         });
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String number1=String.valueOf(num1.getText());
-                String number2=String.valueOf(num2.getText());
-                output.setText(String.format(String.valueOf(eval(number1+math+number2))));
+                output.setText(String.format(String.valueOf(eval(String.valueOf(output.getText())))));
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                output.setText("");
             }
         });
 
     }
-    public static double eval(final String str) {
-        return new Object() {
-            int pos = -1, ch;
+// https://www.youtube.com/watch?v=8sGtJN9_F9k
+//    used the video to show who to add expressions to android studios
+    public static double eval( String str) {
+       ExpressionBuilder builder = new ExpressionBuilder(str);
+       Expression expression = builder.build();
+       return expression.evaluate();
 
-            void nextChar() {
-                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
-            }
-
-            boolean eat(int charToEat) {
-                while (ch == ' ') nextChar();
-                if (ch == charToEat) {
-                    nextChar();
-                    return true;
-                }
-                return false;
-            }
-
-            double parse() {
-                nextChar();
-                double x = parseExpression();
-                if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
-                return x;
-            }
-
-            // Grammar:
-            // expression = term | expression `+` term | expression `-` term
-            // term = factor | term `*` factor | term `/` factor
-            // factor = `+` factor | `-` factor | `(` expression `)` | number
-            //        | functionName `(` expression `)` | functionName factor
-            //        | factor `^` factor
-
-            double parseExpression() {
-                double x = parseTerm();
-                for (;;) {
-                    if      (eat('+')) x += parseTerm(); // addition
-                    else if (eat('-')) x -= parseTerm(); // subtraction
-                    else return x;
-                }
-            }
-
-            double parseTerm() {
-                double x = parseFactor();
-                for (;;) {
-                    if      (eat('*')) x *= parseFactor(); // multiplication
-                    else if (eat('/')) x /= parseFactor(); // division
-                    else return x;
-                }
-            }
-
-            double parseFactor() {
-                if (eat('+')) return +parseFactor(); // unary plus
-                if (eat('-')) return -parseFactor(); // unary minus
-
-                double x;
-                int startPos = this.pos;
-                if (eat('(')) { // parentheses
-                    x = parseExpression();
-                    if (!eat(')')) throw new RuntimeException("Missing ')'");
-                } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
-                    while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
-                    x = Double.parseDouble(str.substring(startPos, this.pos));
-                } else if (ch >= 'a' && ch <= 'z') { // functions
-                    while (ch >= 'a' && ch <= 'z') nextChar();
-                    String func = str.substring(startPos, this.pos);
-                    if (eat('(')) {
-                        x = parseExpression();
-                        if (!eat(')')) throw new RuntimeException("Missing ')' after argument to " + func);
-                    } else {
-                        x = parseFactor();
-                    }
-                    if (func.equals("sqrt")) x = Math.sqrt(x);
-                    else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
-                    else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
-                    else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
-                    else throw new RuntimeException("Unknown function: " + func);
-                } else {
-                    throw new RuntimeException("Unexpected: " + (char)ch);
-                }
-
-                if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
-
-                return x;
-            }
-        }.parse();
-    }
-}
+}}
