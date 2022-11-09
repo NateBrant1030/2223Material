@@ -8,15 +8,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="421dp"
+        android:layout_height="159dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="94dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginBottom="34dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/attack"
+        app:layout_constraintBottom_toTopOf="@+id/input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,19 +26,33 @@
             android:layout_height="wrap_content"
             android:text="Welcome to The Adventure game" />
 
+        <TextView
+            android:id="@+id/Coins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Coins: " />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="57dp" />
 
         <TextView
             android:id="@+id/output"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="402dp"
+            android:layout_height="65dp"
+            android:gravity="center_horizontal"
             android:text="temp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
     </LinearLayout>
 
@@ -46,21 +60,21 @@
         android:id="@+id/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="218dp"
+        android:layout_marginBottom="294dp"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input" />
+        app:layout_constraintTop_toBottomOf="@+id/attack" />
 
     <EditText
         android:id="@+id/input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/main"
+        app:layout_constraintBottom_toTopOf="@+id/attack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -69,12 +83,11 @@
         android:id="@+id/attack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="263dp"
+        android:layout_marginStart="11dp"
         android:text="fight"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/main"
         app:layout_constraintStart_toStartOf="@+id/main"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/input" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
